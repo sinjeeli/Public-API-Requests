@@ -1,87 +1,36 @@
-
-function fetchData(url){
-return fetch(url)
-.then((response)=>(response.json()))
-.then((data)=>data.results)
-.catch((error)=> console.log('Errorz boi!:', error));
-
-}
+const gallery = document.getElementById('gallery');
 //
-function createEmployeeCard(employee){
 
-let anything;
+function showImage(display) {
 
-employee.forEach((employee, index)=>
-{
-    anything = document.createElement('div');
-    anything.className = 'card';
-    anything.innerHTML = `
+    let box;
+
+display.forEach(display)=> {
+    box = document.createElement('div');
+    box.className = 'card';
+    box.innerHTML = `
+    
     <div class="card-img-container">
-    <img class="card-img" src="${employee.picture.medium}" alt="${employee.name.first}">
+    <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
 </div>
 <div class="card-info-container">
-<h3 id="name" class="card-name cap">${result.name.first} ${result.name.last} </h3>
-</div>`
-
-})
-gallery.insertAdjacentElement('beforeend', anything)
-
-}
-//
-function createModal(employee, index){
-
-    let modalContainer = document.createElement("div");;
-
-    modalContainer.className = 'modal-container';
-
-    modalContainer.innerHTML = `
-    <div class="modal">
-                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-                    <div class="modal-info-container">
-                        <img class="modal-img" src="${employee?.picture?.medium}" alt="${employee?.name?.first}">
+    <h3 id="name" class="card-name cap">first last</h3>
+    <p class="card-text">email</p>
+    <p class="card-text cap">city, state</p>
+</div>
 
     `
 
-    gallery.appendChild(modalContainer);
-
 
 }
-//
-function formatCellNumber(employee){
-
 
 }
+
+
+
+
+
 //
-function formatBirthday(employee){
-
-
-}
-//
-
-
-fetchData('https://randomuser.me/api/?results=12')
-.then((anything)=>{
-
-    anything.forEach((anything2)=>{
-        createEmployeeCard(anything2);
-
-    });
-
-})
-//
-.catch((error)=> console.log('Error', error));
-//
-
-document.getElementById('gallery').addEventListener('click', (e)=> {
-
-    createModal(result, index)
-
-});
-
-document.getElementById('modal-close-btn').addEventListener('click', (e)=> {
-
-    if(e.target.tagName === 'STRONG'){
-        gallery.removeChild(gallery.lastElementChild);
-    }
-
-});
+fetch("https://randomuser.me/api/?results=12")
+.then((response)=> response.json())
+.then((data)=> showImage(data.results))
